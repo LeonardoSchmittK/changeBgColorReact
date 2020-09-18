@@ -1,55 +1,58 @@
- import React, {Component} from 'react';
+import React, { Component } from "react";
 
-  const style={
-        fontFamily:'cursive',color:'black',fontSize:300,
-        textShadow:'5px 4px 10px grey',margin:'auto',textAlign:'center'
-      }
 
-  class Salute extends React.Component{
-    constructor(props){
-      super(props); 
-      this.state={
-           count:0
-      }
-    }
-    reset() {
-      this.setState({
-        count: 0
-      });
-    }
-    increment() {
-      this.setState(state => ({
-        count: this.state.count + 1
-      }));
-    }
-    decrement() {
-      this.setState(state => ({
-        count: this.state.count - 1
-      }));
-    }
-    render(){ 
-      return(
-        <> 
-          <button style={{fontSize:23}} className='inc' onClick={this.increment.bind(this)}>Increment</button>
+class ChangeColor extends React.Component{
+  constructor(){
+   super()
+   this.state={
+     color:'#fafafa'
+   }
+  }
+ handleChange(event){
+    this.setState({
+     color:event.target.value
+    })
+ } 
 
-          <button style={{fontSize:23}} className='dec' onClick={this.decrement.bind(this)}>Decrement</button>
 
-          <button style={{fontSize:23}} className='reset' onClick={this.reset.bind(this)}>Reset</button>
 
-          <h1 style={style}> {this.state.count} </h1>
-          
-        
-        </>
-      );
-    };
-};
 
-function App() {
-  return (
-    <div className="App">
-      <Salute />
+  render(){
+
+
+   const styleContainerInput={
+    width:400,
+    height:400,
+    background:this.state.color, 
+    // border:'1px solid grey',
+    borderRadius:'50%',
+    margin:'auto',
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    position:'relative',
+    boxShadow:'inset 0 10px 70px #d6d2d2'
+  }
+  const styleTextColor={
+    position:'absolute',
+    fontFamily:'cursive',
+  }
+   return (
+    <div style={styleContainerInput}>
+     <h1 style={styleTextColor}>{this.state.color}</h1>
+       <input type='color' value={this.state.color} style={{margin:'auto',width:150,height:150,padding:10}} onChange={this.handleChange.bind(this)} />
+       
+       {/* <h1 style={}> {window.document.body.style.backgroundColor=this.state.color}</h1> */}
     </div>
-  );
+          
+    )
+  }
 }
 
-export default App;
+ function App() {
+ return(
+   <ChangeColor />
+ )
+}
+
+export default App
